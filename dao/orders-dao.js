@@ -17,8 +17,8 @@ async function getUserOrderHistory(userId) {
     return getOrdersOfUser
 }
 
-async function validateShippingDate(newOrder){
-    let sql=`SELECT count(shippingDate) AS "amountOfShippingInDate" From orders where shippingDate=?`;
+async function validateShippingDate(newOrder) {
+    let sql = `SELECT count(shippingDate) AS "amountOfShippingInDate" From orders where shippingDate=?`;
 
     let parameters = [newOrder.shippingDate];
 
@@ -34,11 +34,28 @@ async function validateShippingDate(newOrder){
 async function addOrder(newOrder, userId) {
     let sql = "INSERT INTO orders (userId,globalId,cartId,finalPrice,creditCard,shippingCity,shippingStreet,shippingDate,orderDate) VALUES (?,?,?,?,?,?,?,?,?)";
 
-    let parameters = [userId,newOrder.globalId, newOrder.cartId, newOrder.finalPrice, newOrder.creditCard, newOrder.shippingCity,
-        newOrder.shippingStreet, newOrder.shippingDate,newOrder.orderDate];
+    let parameters = [userId, newOrder.globalId, newOrder.cartId, newOrder.finalPrice, newOrder.creditCard, newOrder.shippingCity,
+    newOrder.shippingStreet, newOrder.shippingDate, newOrder.orderDate];
 
+
+    let updateStockTrigger = `delimiter $$
+    create trigger update_stock_trigger 
+    after insert on orders
+    for each row
+    begin
+    UPDATE products p
+    LEFT JOIN items i 
+    ON p.productId = i.productId 
+    LEFT JOIN orders o 
+    ON i.cart_id = o.cartId 
+    SET p.stock = (p.stock - i.quantity)
+    WHERE o.cartId = ?;
+    end $$`;
+
+    let updateStockParameters = [newOrder.cartId];
     try {
         newOrder = await connection.executeWithParameters(sql, parameters);
+        productStockChange = connection.executeWithParameters(updateStockTrigger, updateStockParameters);
         cartDao.addCart(userId);
     }
     catch (error) {
