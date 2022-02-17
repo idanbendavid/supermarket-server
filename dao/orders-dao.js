@@ -38,24 +38,20 @@ async function addOrder(newOrder, userId) {
     newOrder.shippingStreet, newOrder.shippingDate, newOrder.orderDate];
 
 
-    let updateStockTrigger = `delimiter $$
-    create trigger update_stock_trigger 
-    after insert on orders
-    for each row
-    begin
+    let updateProductStock = `
     UPDATE products p
     LEFT JOIN items i 
     ON p.productId = i.productId 
     LEFT JOIN orders o 
     ON i.cart_id = o.cartId 
     SET p.stock = (p.stock - i.quantity)
-    WHERE o.cartId = ?;
-    end $$`;
+    WHERE o.cartId = ?`;
 
-    let updateStockParameters = [newOrder.cartId];
+    let updateProductStockParameters = [newOrder.cartId];
+    
     try {
         newOrder = await connection.executeWithParameters(sql, parameters);
-        productStockChange = connection.executeWithParameters(updateStockTrigger, updateStockParameters);
+        productStockChange = connection.executeWithParameters(updateProductStock, updateProductStockParameters);
         cartDao.addCart(userId);
     }
     catch (error) {
