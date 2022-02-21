@@ -1,5 +1,4 @@
 const express = require("express");
-const path = require("path");
 
 const usersController = require("./controllers/users-controller");
 const productsController = require("./controllers/products-controller");
@@ -15,13 +14,6 @@ const fileupload = require("express-fileupload");
 
 const cors = require('cors');
 const server = express();
-
-server.use(express.static(__dirname + '/dist/<project>'));
-app.get('/*', function (req, res) {
-    res.sendFile(path.join(__dirname +
-        '/dist/<project>/index.html'));
-});
-server.listen(process.env.PORT || 8080);
 
 server.use(fileupload());
 server.use(express.static("files"));
