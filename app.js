@@ -16,10 +16,10 @@ const fileupload = require("express-fileupload");
 const cors = require('cors');
 const server = express();
 
-server.use(express.static(__dirname + '/dist/<supermarket-client>'));
+server.use(express.static(__dirname + '/dist/<project>'));
 app.get('/*', function (req, res) {
     res.sendFile(path.join(__dirname +
-        '/dist/<supermarket-client>/index.html'));
+        '/dist/<project>/index.html'));
 });
 server.listen(process.env.PORT || 8080);
 
