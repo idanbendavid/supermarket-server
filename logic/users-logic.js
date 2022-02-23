@@ -68,9 +68,9 @@ async function addUser(newUser) {
     let registerUser = await usersDao.addUser(newUser);
 
     const token = jwt.sign({
-        email: newUser.email,
         userId: registerUser.insertId,
-        userType: newUser.userType
+        userType: newUser.userType,
+        firstName: newUser.firstName
     }, config.secret);
 
     return { token, newUser ,registerUser};

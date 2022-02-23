@@ -5,7 +5,7 @@ const router = express.Router();
 
 router.get("/", async (request, response, next) => {
 
-    let userId = usersLogic.verifyUserToken(request.headers.authorization).userId
+    let userId = usersLogic.verifyUserToken(request.headers.authorization).userId;
     try {
         getUserDetails = await usersLogic.getDetailsOfUser(userId);
         response.json(getUserDetails)
