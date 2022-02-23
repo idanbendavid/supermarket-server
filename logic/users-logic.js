@@ -65,15 +65,15 @@ async function addUser(newUser) {
 
     newUser.password = crypto.createHash("md5").update(saltLeft + newUser.password + saltRight).digest("hex");
 
-    await usersDao.addUser(newUser);
+    let registerUser = await usersDao.addUser(newUser);
 
     const token = jwt.sign({
         email: newUser.email,
-        userId: newUser.userId,
+        userId: registerUser.insertId,
         userType: newUser.userType
     }, config.secret);
 
-    return { token: token, email: newUser.email, userId: newUser.userId, userType: newUser.userType };
+    return { token, newUser ,registerUser};
 }
 
 async function addUserValidation(newUser) {

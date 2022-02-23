@@ -23,7 +23,7 @@ router.get("/", async (request, response, next) => {
 router.post("/", async (request, response, next) => {
     let newCart = request.body;
     
-    let userId = usersLogic.verifyUserToken(request.headers.authorization).userId
+    let userId = usersLogic.verifyUserToken(request.headers.authorization).userId;
 
     try {
         newCart = await cartLogic.addCart(userId);

@@ -49,8 +49,8 @@ router.post("/", async (request, response, next) => {
     let newUser = request.body;
     
     try {
-        await usersLogic.addUser(newUser);
-        response.json(newUser);
+        let registerUser = await usersLogic.addUser(newUser);
+        response.json(registerUser);
     }
     catch (error) {
         return next(error);
