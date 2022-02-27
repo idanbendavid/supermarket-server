@@ -17,12 +17,12 @@ const fileupload = require("express-fileupload");
 const cors = require('cors');
 const server = express();
 
-// server.use(express.static('./dist/project'));
+server.use(express.static('./dist/project'));
 
-// server.get('/*', (req, res) =>
-//     res.sendFile('index.html', {root: 'dist/project/'}),
-// );
-// server.listen(process.env.PORT || 8080);
+server.get('/*', (req, res) =>
+    res.sendFile('index.html', {root: 'dist/project/'}),
+);
+server.listen(process.env.PORT || 8080);
 
 server.use(fileupload());
 server.use(express.static("files"));
