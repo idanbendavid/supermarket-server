@@ -27,7 +27,7 @@ server.use(fileupload());
 server.use(express.static("files"));
 server.use(express.json());
 
-server.use(cors({ origin: ["http://localhost:4200", "https://supermarket-platform.herokuapp.com"] }));
+server.use(cors({ origin: ["https://supermarket-platform.herokuapp.com:8080", "93.172.247.136:8080"] }));
 
 server.use("/users", usersController);
 server.use("/products", productsController);
