@@ -1,5 +1,5 @@
 const express = require("express");
-const path = require('path');
+// const path = require('path');
 
 
 const usersController = require("./controllers/users-controller");
@@ -17,17 +17,17 @@ const fileupload = require("express-fileupload");
 const cors = require('cors');
 const server = express();
 
-server.use(express.static('./dist/project'));
+// server.use(express.static('./dist/project'));
 
-server.get('/*', (req, res) =>
-    res.sendFile('index.html', {root: 'dist/project/'}),
-);
+// server.get('/*', (req, res) =>
+//     res.sendFile('index.html', {root: 'dist/project/'}),
+// );
 
 server.use(fileupload());
 server.use(express.static("files"));
 server.use(express.json());
 
-server.use(cors({ origin: ["http://localhost:4200", "http://supermarket-platform.herokuapp.com:4200/"] }));
+server.use(cors({ origin: ["http://localhost:4200"] }));
 
 server.use("/users", usersController);
 server.use("/products", productsController);
@@ -42,6 +42,6 @@ server.use(errorHandler);
 server.use(loginFilter);
 
 
-server.listen(process.env.PORT || 8080);
-
+// server.listen(process.env.PORT || 8080);
+server.listen(8080);
 

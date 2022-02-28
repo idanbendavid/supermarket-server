@@ -1,10 +1,14 @@
 const mysql = require("mysql2");
 
 const connection = mysql.createConnection({
-    host: "eu-cdbr-west-02.cleardb.net", // computer
-    user: "bdedc4a8a91d16", // username
-    password: "10464076", // password   
-    database: "heroku_e061c990dc2b0d1" // database name
+    host: "localhost", // computer
+    user: "root", // username
+    password: "1234", // password   
+    database: "supermarket" // database name
+    // host: "eu-cdbr-west-02.cleardb.net", // computer
+    // user: "bdedc4a8a91d16", // username
+    // password: "10464076", // password   
+    // database: "heroku_e061c990dc2b0d1" // database name
 });
 
 connection.connect(err => {
