@@ -19,14 +19,14 @@ const server = express();
 server.use(express.static('./dist/project'));
 
 server.get('/*', (req, res) =>
-    res.sendFile('index.html', {root: 'dist/project/'}),
+    res.sendFile('index.html', { root: 'dist/project/' }),
 );
 
 server.use(fileupload());
 server.use(express.static("files"));
 server.use(express.json());
 
-server.use(cors({ origin: ["http://localhost:4200"] }));
+server.use(cors({ origin: ["http://localhost:4200", "https://supermarket-platform.herokuapp.com:8080"] }));
 
 server.use("/users", usersController);
 server.use("/products", productsController);
