@@ -1,6 +1,5 @@
 const express = require("express");
-// const path = require('path');
-
+const path = require('path');
 
 const usersController = require("./controllers/users-controller");
 const productsController = require("./controllers/products-controller");
@@ -17,11 +16,11 @@ const fileupload = require("express-fileupload");
 const cors = require('cors');
 const server = express();
 
-// server.use(express.static('./dist/project'));
+server.use(express.static('./dist/project'));
 
-// server.get('/*', (req, res) =>
-//     res.sendFile('index.html', {root: 'dist/project/'}),
-// );
+server.get('/*', (req, res) =>
+    res.sendFile('index.html', {root: 'dist/project/'}),
+);
 
 server.use(fileupload());
 server.use(express.static("files"));
@@ -42,8 +41,7 @@ server.use(errorHandler);
 server.use(loginFilter);
 
 
-// server.listen(process.env.PORT || 8080);
-server.listen(8080);
-// server.listen(process.env.PORT || 8080);
+server.listen(process.env.PORT || 8080);
+// server.listen(8080);
 
 
