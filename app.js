@@ -16,6 +16,8 @@ const fileupload = require("express-fileupload");
 const cors = require('cors');
 const server = express();
 
+server.listen(process.env.PORT || 8080);
+
 server.use(express.static('./dist/project'));
 
 server.get('/*', (req, res) =>
@@ -41,7 +43,6 @@ server.use(errorHandler);
 server.use(loginFilter);
 
 
-server.listen(process.env.PORT || 8080);
 // server.listen(8080);
 
 
