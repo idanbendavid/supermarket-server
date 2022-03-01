@@ -22,7 +22,7 @@ const port = process.env.PORT || 8080;
 
 process.env.NODE_ENV = "production";
 if (process.env.NODE_ENV = "production") {
-    server.use(express.static('./dist/project'));
+    server.use(express.static('dist'));
 }
 else {
     const corsOptions = {
@@ -30,11 +30,10 @@ else {
         credentials: true
     }
     server.use(cors(corsOptions));
-
 }
 
-server.use(express.static("files"));
 server.use(express.json());
+server.use(express.static("files"));
 
 server.use("/users", usersController);
 server.use("/products", productsController);
@@ -45,7 +44,7 @@ server.use("/files", fileController);
 server.use("/items", itemsController);
 
 server.get('*', (req, res) => {
-    res.sendFile(path.join(__dirname, 'dist', 'index.html'))
+    res.sendFile(path.join(__dirname, 'dist', 'project/index.html'))
 })
 
 
