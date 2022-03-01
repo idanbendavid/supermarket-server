@@ -20,7 +20,7 @@ server.listen(process.env.PORT || 8080);
 
 server.use(express.static(path.join('./dist/project/', 'public')));
 
-server.get('*', (req, res) =>
+server.get('/*', (req, res) =>
     res.sendFile('index.html',  {root:'dist/project/'} )
 );
 
