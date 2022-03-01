@@ -10,14 +10,6 @@ const connection = mysql.createPool({
     queueLimit: 0 
 })
 
-connection.connect(err => {
-    if (err) {
-        console.log("Failed to create connection + " + err);
-        return;
-    }
-    console.log("We're connected to MySQL");
-});
-
 
 function execute(sql) {
     return new Promise((resolve, reject) => {
