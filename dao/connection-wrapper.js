@@ -1,14 +1,23 @@
 const mysql = require("mysql2");
 
-const connection = mysql.createPool({
-    host: "",
-    user: "",
-    password: "",
-    database: "",
-    waitForConnections: true,
-    connectionLimit: 10,
-    queueLimit: 0 
-})
+const connection = mysql.createConnection({
+    // host: "localhost", // computer
+    // user: "root", // username
+    // password: "1234", // password   
+    // database: "supermarket" // database name
+    host: "eu-cdbr-west-02.cleardb.net", // computer
+    user: "bdedc4a8a91d16", // username
+    password: "10464076", // password   
+    database: "heroku_e061c990dc2b0d1" // database name
+});
+
+connection.connect(err => {
+    if (err) {
+        console.log("Failed to create connection + " + err);
+        return;
+    }
+    console.log("We're connected to MySQL");
+});
 
 
 function execute(sql) {
