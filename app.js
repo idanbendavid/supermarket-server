@@ -16,20 +16,25 @@ const fileupload = require("express-fileupload");
 const cors = require('cors');
 const server = express();
 
-
-server.use(express.static(path.join('./dist/project')));
-
-server.get('/*', (req, res) =>
-    res.sendFile('index.html', { root: 'dist/project/' })
-);
-
-server.listen(process.env.PORT || 8080);
-
 server.use(fileupload());
+
+const port = process.env.PORT || 8080;
+
+process.env.NODE_ENV = "production";
+if (process.env.NODE_ENV = "production") {
+    server.use(express.static('./dist'));
+}
+else {
+    const corsOptions = {
+        origin: ["http://localhost:4200", "https://supermarket-platform.herokuapp.com:8080"],
+        credentials: true
+    }
+    server.use(cors(corsOptions));
+
+}
+
 server.use(express.static("files"));
 server.use(express.json());
-
-server.use(cors({ origin: ["http://localhost:4200", "https://supermarket-platform.herokuapp.com:8080"] }));
 
 server.use("/users", usersController);
 server.use("/products", productsController);
@@ -39,10 +44,15 @@ server.use("/orders", ordersController);
 server.use("/files", fileController);
 server.use("/items", itemsController);
 
+server.get('*', (req, res) => {
+    res.sendFile(path.join(__dirname, 'dist', 'index.html'))
+})
+
 
 server.use(errorHandler);
 server.use(loginFilter);
 
+server.listen(port, () => console.log("listening on ", port));
 
 // server.listen(8080);
 
