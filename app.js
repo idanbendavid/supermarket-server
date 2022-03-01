@@ -22,7 +22,7 @@ const port = process.env.PORT || 8080;
 
 process.env.NODE_ENV = "production";
 if (process.env.NODE_ENV = "production") {
-    server.use(express.static('./dist'));
+    server.use(express.static('./dist/project'));
 }
 else {
     const corsOptions = {
