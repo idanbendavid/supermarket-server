@@ -26,7 +26,7 @@ if (process.env.NODE_ENV = "production") {
 }
 else {
     const corsOptions = {
-        origin: ["http://localhost:4200", "https://supermarket-platform.herokuapp.com:8080"],
+        origin: ["http://localhost:4200", "https://supermarket-platform.herokuapp.com"],
         credentials: true
     }
     server.use(cors(corsOptions));
