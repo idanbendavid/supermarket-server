@@ -18,7 +18,7 @@ const server = express();
 
 server.listen(process.env.PORT || 8080);
 
-server.use(express.static('./dist/project'));
+server.use(express.static(path.join('./dist/project')));
 
 server.get('/*', (req, res) =>
     res.sendFile('index.html', { root: 'dist/project/' })
