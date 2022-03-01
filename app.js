@@ -21,7 +21,7 @@ server.listen(process.env.PORT || 8080);
 server.use(express.static(path.join('./dist/project', 'public')));
 
 server.get('/*', (req, res) =>
-    res.sendFile(path.join('index.html', { root: 'dist/project/' }))
+    res.sendFile(path.join('index.html',  'dist/project/' ))
 );
 
 server.use(fileupload());
