@@ -18,10 +18,10 @@ const server = express();
 
 server.listen(process.env.PORT || 8080);
 
-server.use(express.static(path.join('./dist/project', 'public')));
+server.use(express.static(path.join('./dist/project/', 'public')));
 
-server.get('/*', (req, res) =>
-    res.sendFile(path.join('index.html',  'dist/project/' ))
+server.get('/', (req, res) =>
+    res.sendFile('index.html',  {root:'dist/project/'} )
 );
 
 server.use(fileupload());
