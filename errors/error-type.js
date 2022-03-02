@@ -69,9 +69,15 @@ let ErrorType = {
     DATE_FULL: {
         id: 12,
         httpCode: 410,
-        message: "Shipping Date Already Full, Select Another Date",
+        message: "Shipping date already full, Select another date",
         isShowStackTrace: false
     },
+    GET_CART: {
+        id: 13,
+        httpCode: 411,
+        message: "Your cart is Unavialable please login or register to start shopping",
+        isShowStackTrace: false
+    }
 }
 
 module.exports = ErrorType;

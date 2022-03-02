@@ -4,10 +4,18 @@ const ServerError = require("../errors/server-error");
 const ErrorType = require("../errors/error-type");
 
 async function getCartByUserId(userId) {
-    let getCartOfUser = await cartDao.getCartByUserId(userId);
+    let getCartOfUser;
     
+    if (!userId) {
+        throw new ServerError(ErrorType.GET_CART, error)
+    }
+    else {
+        getCartOfUser = await cartDao.getCartByUserId(userId);
+    }
     let lineItems = await itemsDao.getAllItemsByCartId(getCartOfUser.cartId);
+
     getCartOfUser.lineItems = lineItems;
+
     return getCartOfUser;
 }
 
