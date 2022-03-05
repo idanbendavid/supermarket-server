@@ -20,7 +20,7 @@ async function getCartByUserId(userId) {
 }
 
 async function addCart(userId) {
-    let sql = `INSERT INTO carts (user_id, dateCreated) VALUES (?,now())`;
+    let sql = `INSERT INTO carts (user_id, dateCreated) VALUES (?,DATE_ADD(now(),interval 2 hour))`;
 
     let parameters = [userId];
 
