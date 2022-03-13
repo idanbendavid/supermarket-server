@@ -20,7 +20,7 @@ async function login(userLoginDetails) {
     userLoginDetails.password = crypto.createHash("md5").update(saltLeft + userLoginDetails.password + saltRight).digest("hex");
 
     userLoginDetails = await usersDao.login(userLoginDetails);
-
+    
     const token = jwt.sign({
         userId: userLoginDetails.userId,
         userType: userLoginDetails.userType,

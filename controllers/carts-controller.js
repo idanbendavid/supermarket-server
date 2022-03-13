@@ -9,7 +9,7 @@ const router = express.Router();
 router.get("/", async (request, response, next) => {
 
     let userId = usersLogic.verifyUserToken(request.headers.authorization).userId;
-
+    console.log(userId, "line 12 cart controller");
     try {
         let getCartOfUser = await cartLogic.getCartByUserId(userId);
         response.json(getCartOfUser)
