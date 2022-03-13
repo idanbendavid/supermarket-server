@@ -26,7 +26,7 @@ async function login(userLoginDetails) {
         userType: userLoginDetails.userType,
         firstName: userLoginDetails.firstName
     }, config.secret);
-
+  
 
     return { token: token, userType: userLoginDetails.userType, userId: userLoginDetails.userId, firstName: userLoginDetails.firstName };
 }
