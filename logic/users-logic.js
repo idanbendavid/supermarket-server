@@ -18,15 +18,15 @@ async function getDetailsOfUser(userId) {
 async function login(userLoginDetails) {
     validateLoginEmailAndPassword(userLoginDetails);
     userLoginDetails.password = crypto.createHash("md5").update(saltLeft + userLoginDetails.password + saltRight).digest("hex");
-
+    console.log(userLoginDetails);
     userLoginDetails = await usersDao.login(userLoginDetails);
-
+   
     const token = jwt.sign({
         userId: userLoginDetails.userId,
         userType: userLoginDetails.userType,
         firstName: userLoginDetails.firstName
     }, config.secret);
-
+    console.log(token);
 
     return { token: token, userType: userLoginDetails.userType, userId: userLoginDetails.userId, firstName: userLoginDetails.firstName };
 }
