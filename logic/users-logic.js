@@ -44,12 +44,17 @@ function validateLoginEmailAndPassword(userLoginDetails) {
 async function verifyUserToken(token) {
 
     let decoded = await jwt_decode(token);
-    try{
-    let userId = decoded.userId;
-    let userType = decoded.userType;
-    let firstName = decoded.firstName;
+
+    let userId;
+    let userType;
+    let firstName;
+    
+    try {
+        userId = decoded.userId;
+        userType = decoded.userType;
+        firstName = decoded.firstName;
     }
-    catch(err){
+    catch (err) {
         throw new ServerError(ErrorType.GENERAL_ERROR, err)
     }
 
@@ -78,7 +83,7 @@ async function addUser(newUser) {
         firstName: newUser.firstName
     }, config.secret);
 
-    return { token, newUser ,registerUser};
+    return { token, newUser, registerUser };
 }
 
 async function addUserValidation(newUser) {
