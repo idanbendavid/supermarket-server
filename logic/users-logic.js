@@ -20,13 +20,13 @@ async function login(userLoginDetails) {
     userLoginDetails.password = crypto.createHash("md5").update(saltLeft + userLoginDetails.password + saltRight).digest("hex");
 
     userLoginDetails = await usersDao.login(userLoginDetails);
-    
+
     const token = jwt.sign({
         userId: userLoginDetails.userId,
         userType: userLoginDetails.userType,
         firstName: userLoginDetails.firstName
     }, config.secret);
-  
+
 
     return { token: token, userType: userLoginDetails.userType, userId: userLoginDetails.userId, firstName: userLoginDetails.firstName };
 }
@@ -45,18 +45,11 @@ async function verifyUserToken(token) {
 
     let decoded = await jwt_decode(token);
 
-    let userId;
-    let userType;
-    let firstName;
-    
-    try {
-        userId = decoded.userId;
-        userType = decoded.userType;
-        firstName = decoded.firstName;
-    }
-    catch (err) {
-        throw new ServerError(ErrorType.GENERAL_ERROR, err)
-    }
+    console.log(decoded, "line 47 verify token");
+
+    let userId = decoded.userId;
+    let userType = decoded.userType;
+    let firstName = decoded.firstName;
 
     return { userId, userType, firstName }
 }
