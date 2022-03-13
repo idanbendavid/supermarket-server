@@ -45,12 +45,13 @@ async function verifyUserToken(token) {
 
     let decoded = await jwt_decode(token);
 
-    console.log(decoded, "line 47 verify token");
+    console.log(decoded, "line 47 user logic");
 
     let userId = decoded.userId;
     let userType = decoded.userType;
     let firstName = decoded.firstName;
 
+    console.log(`userId: ${userId}, userType: ${userType}, firstName: ${firstName}`);
     return { userId, userType, firstName }
 }
 
