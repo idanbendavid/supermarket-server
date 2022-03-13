@@ -9,7 +9,7 @@ const router = express.Router();
 router.get("/", async (request, response, next) => {
 
     let userId = usersLogic.verifyUserToken(request.headers.authorization).userId;
-
+    console.log(userId);
     try {
         let getCartOfUser = await cartLogic.getCartByUserId(userId);
         response.json(getCartOfUser)
@@ -24,7 +24,7 @@ router.post("/", async (request, response, next) => {
     let newCart = request.body;
     
     let userId = usersLogic.verifyUserToken(request.headers.authorization).userId;
-
+    console.log(userId);
     try {
         newCart = await cartLogic.addCart(userId);
         response.json(newCart);
