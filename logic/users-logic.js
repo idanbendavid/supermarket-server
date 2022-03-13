@@ -41,12 +41,17 @@ function validateLoginEmailAndPassword(userLoginDetails) {
     }
 }
 
-function verifyUserToken(token) {
-    let decoded = jwt_decode(token);
+async function verifyUserToken(token) {
 
+    let decoded = await jwt_decode(token);
+    try{
     let userId = decoded.userId;
     let userType = decoded.userType;
     let firstName = decoded.firstName;
+    }
+    catch(err){
+        throw new ServerError(ErrorType.GENERAL_ERROR, err)
+    }
 
     return { userId, userType, firstName }
 }
