@@ -18,9 +18,9 @@ async function getDetailsOfUser(userId) {
 async function login(userLoginDetails) {
     validateLoginEmailAndPassword(userLoginDetails);
     userLoginDetails.password = crypto.createHash("md5").update(saltLeft + userLoginDetails.password + saltRight).digest("hex");
-    console.log(userLoginDetails, "line 21");
+
     userLoginDetails = await usersDao.login(userLoginDetails);
-    console.log(userLoginDetails,"line 23");
+
     const token = jwt.sign({
         userId: userLoginDetails.userId,
         userType: userLoginDetails.userType,
