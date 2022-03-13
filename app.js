@@ -36,13 +36,13 @@ else {
 server.use(express.static("files"));
 server.use(express.json());
 
-// server.use("/users", usersController);
-// server.use("/products", productsController);
-// server.use("/categories", categoriesController);
-// server.use("/carts", cartsController);
-// server.use("/orders", ordersController);
-// server.use("/files", fileController);
-// server.use("/items", itemsController);
+server.use("/users", usersController);
+server.use("/products", productsController);
+server.use("/categories", categoriesController);
+server.use("/carts", cartsController);
+server.use("/orders", ordersController);
+server.use("/files", fileController);
+server.use("/items", itemsController);
 
 server.get('*', (req, res) => {
     res.sendFile(path.join(__dirname, 'dist', 'project/index.html'))
