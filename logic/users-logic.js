@@ -41,18 +41,17 @@ function validateLoginEmailAndPassword(userLoginDetails) {
     }
 }
 
-async function verifyUserToken(token) {
+function verifyUserToken(token) {
 
-    let decoded = await jwt_decode(token);
+    let decoded = jwt_decode(token);
 
-    console.log(decoded, "line 47 user logic");
+    let userDetails = {
+        userId: decoded.userId,
+        userType: decoded.userType,
+        firstName: decoded.firstName
+    }
 
-    let userId = decoded.userId;
-    let userType = decoded.userType;
-    let firstName = decoded.firstName;
-
-    console.log(`userId: ${userId}, userType: ${userType}, firstName: ${firstName}`);
-    return { userId, userType, firstName }
+    return userDetails;
 }
 
 
