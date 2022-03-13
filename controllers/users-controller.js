@@ -29,7 +29,7 @@ router.post("/login", async (request, response, next) => {
     }
 });
 
-router.get("/verify_token", async (request, response, next) => {
+router.get("/verify_token", (request, response, next) => {
     let token = request.headers.authorization
 
     let userDetails
